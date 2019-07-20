@@ -122,7 +122,7 @@ exports.uploadImage = (req, res) => {
   const path = require('path');
   const os = require('os');
   const fs = require('fs');
-if(req.method === "POST"){
+
   const busboy = new BusBoy({
     headers: req.headers
   });
@@ -149,8 +149,10 @@ if(req.method === "POST"){
       admin.storage().bucket().upload(imageToBeUploaded.filepath, {
         resumable: false,
         metadata: {
+          metadata: {
             contentType: imageToBeUploaded.mimetype
         }
+      }
       })
     })
     .then(() => {
@@ -170,7 +172,5 @@ if(req.method === "POST"){
         error: err.code
       })
     })
-  return req.pipe(busboy)
-}
-  
+
 }
