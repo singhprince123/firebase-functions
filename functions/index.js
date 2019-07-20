@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const express = require('express');
 
 const { getAllScreams, postOneScream } = require('./handlers/screams');
-const { signUp, logIn } = require('./handlers/users');
+const { signUp, logIn , uploadImage} = require('./handlers/users');
 
 const app = express();
 
@@ -15,6 +15,7 @@ const FBAuth = require('./util/fbauth');
 // Users Route
 app.post('/signup', signUp);
 app.post('/login', logIn);
+app.post('/user/image',FBAuth, uploadImage);
 
 // Scramse Route
 app.get('/screams', getAllScreams);
